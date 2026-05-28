@@ -1,0 +1,25 @@
+node_modules/
+dist/
+target/
+bin/
+obj/
+.vs/
+.idea/
+.vscode/
+logs/
+*.log
+*.tmp
+*.user
+*.suo
+.env
+.env.*
+!.env.example
+tsconfig.tsbuildinfo
+tsconfig.node.tsbuildinfo
+
+# Local preparation prompt, not part of the deploy bundle
+shangxianzhunbei.md
+
+# OS/editor noise
+.DS_Store
+Thumbs.db

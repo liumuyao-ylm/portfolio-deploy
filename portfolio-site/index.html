@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>姚学良（姚六木） | Java 后端开发作品集</title>
+    <meta
+      name="description"
+      content="姚学良的个人作品集、网页简历与项目展示，包含药店管理系统管理端前端、用户端以及 NewPlayer 音乐播放器下载入口。姚六木是个人网名。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#/" aria-label="返回首页">
+        <img src="./assets/images/profile/avatar.png" alt="姚学良头像" />
+        <span>姚学良</span>
+      </a>
+      <nav class="main-nav" aria-label="主导航">
+        <a href="#/">首页</a>
+        <a href="#/resume">简历</a>
+        <a href="#/pharmacy-system">药店系统</a>
+        <a href="#/music-player">NewPlayer</a>
+      </nav>
+    </header>
+
+    <main id="app"></main>
+
+    <footer class="site-footer">
+      <span>© 2026 姚学良</span>
+      <span>展示入口：admin.yaoliumu.me / client.yaoliumu.me</span>
+      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer noopener">冀ICP备2026018313号</a>
+    </footer>
+
+    <template id="home-template">
+      <div class="page-shell home-page">
+        <section class="home-hero card">
+          <div class="home-copy">
+            <p class="accent">Java 后端开发 / 前后端分离 Web 开发</p>
+            <h1>姚学良</h1>
+            <p>
+              软件工程本科在读，专注 Java 后端与前后端分离项目开发。当前作品集重点展示药店管理系统管理端前端和用户端。
+            </p>
+            <div class="actions">
+              <a class="button primary" href="https://admin.yaoliumu.me" target="_blank" rel="noreferrer noopener">打开管理端</a>
+              <a class="button" href="https://client.yaoliumu.me" target="_blank" rel="noreferrer noopener">打开用户端</a>
+              <a class="button" href="#/pharmacy-system">查看项目</a>
+            </div>
+          </div>
+          <div class="hero-preview">
+            <img src="./assets/images/pharmacy-admin/dashboard.jpeg" alt="乡镇药店管理系统控制台截图" />
+          </div>
+        </section>
+
+        <section class="card block-section">
+          <h2><span class="icon mini">入</span>药店系统入口</h2>
+          <div class="status-grid">
+            <article class="mini-card">
+              <span class="icon">管</span>
+              <div>
+                <h3><a href="https://admin.yaoliumu.me" target="_blank" rel="noreferrer noopener">admin.yaoliumu.me</a></h3>
+                <p>药店管理系统管理端前端。测试账号：demo，测试密码：demo。</p>
+              </div>
+            </article>
+            <article class="mini-card">
+              <span class="icon">客</span>
+              <div>
+                <h3><a href="https://client.yaoliumu.me" target="_blank" rel="noreferrer noopener">client.yaoliumu.me</a></h3>
+                <p>药店管理系统用户端，展示药品查询、药店信息、会员中心和 AI 客服等功能。</p>
+              </div>
+            </article>
+            <article class="mini-card">
+              <span class="icon">G</span>
+              <div>
+                <h3><a href="https://gitee.com/yaoliumu/lightweight-music-player/releases/tag/v1.0.0" target="_blank" rel="noreferrer noopener">音乐播放器 v1.0.0</a></h3>
+                <p>NewPlayer 轻量级本地音乐播放器 Gitee Release 下载链接。</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="card block-section">
+          <h2><span class="icon mini">项</span>重点项目</h2>
+          <div class="home-projects">
+            <article class="home-project">
+              <img src="./assets/images/pharmacy-admin/dashboard.jpeg" alt="药店系统控制台截图" />
+              <div>
+                <h3>乡镇药店管理系统 <span class="pill">已上线入口</span></h3>
+                <p class="stack">Spring Boot 3 / Vue 3 / MySQL / Nginx</p>
+                <p>前后端分离架构，包含管理端、用户端和后端服务，覆盖药品、供应商、会员、采购、销售、库存、盘点和日志等业务。</p>
+                <a class="text-link" href="#/pharmacy-system">查看详情 →</a>
+              </div>
+            </article>
+            <article class="home-project">
+              <img src="./assets/images/music-player/player-main.png" alt="NewPlayer 主界面截图" />
+              <div>
+                <h3>NewPlayer 轻量级本地播放器 <span class="pill done">v1.0.0</span></h3>
+                <p class="stack">C# / .NET 8 / Windows Forms / NAudio</p>
+                <p>面向 Windows 的本地 MP3 播放器，支持本地歌曲扫描、播放控制、播放模式切换、音量调节和快捷键操作。</p>
+                <a class="text-link" href="#/music-player">查看详情 →</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="card skill-section">
+          <h2><span class="icon mini">技</span>技术栈</h2>
+          <div class="skill-tags">
+            <span>Java</span><span>Spring Boot</span><span>Spring Security</span><span>MyBatis-Plus</span>
+            <span>RESTful API</span><span>MySQL</span><span>Vue 3</span><span>Vite</span>
+            <span>Nginx</span><span>Linux</span><span>C#</span><span>.NET 8</span>
+          </div>
+        </section>
+      </div>
+    </template>
+
+    <template id="resume-template">
+      <div class="page-shell resume-page">
+        <aside class="resume-profile card">
+          <div class="resume-photo">
+            <img src="./assets/images/profile/resume-photo.jpg" alt="姚学良简历照片" />
+          </div>
+          <h1>姚学良</h1>
+          <p>Java 后端开发 / 前后端分离 Web 开发</p>
+          <ul class="plain-list contact-list">
+            <li><span>邮箱</span>15200198392@163.com</li>
+            <li><span>电话</span>15200198392</li>
+            <li><span>地址</span>河北省沧州市黄骅市</li>
+            <li><span>GitHub</span><a href="https://github.com/liumuyao-ylm" target="_blank" rel="noreferrer noopener">liumuyao-ylm</a></li>
+            <li><span>Gitee</span><a href="https://gitee.com/yaoliumu" target="_blank" rel="noreferrer noopener">yaoliumu</a></li>
+          </ul>
+        </aside>
+
+        <div class="resume-content">
+          <section class="card resume-section">
+            <h2><span class="icon mini">介</span>个人简介</h2>
+            <p>软件工程本科在读，专注后端开发方向，熟悉 Java / Spring Boot / MySQL 等核心技术，具备完整的前后端分离项目开发、部署和线上展示经验。</p>
+            <hr />
+            <h2><span class="icon mini">学</span>教育经历</h2>
+            <h3>沧州交通学院 · 软件工程专业 · 本科</h3>
+            <p class="stack">2023.09 - 2027.06</p>
+            <p>在校期间持续完成 Web 项目与桌面应用实践，熟悉从需求分析、数据库设计、接口开发、前端联调到 Nginx 部署的完整流程。</p>
+            <hr />
+            <h2><span class="icon mini">能</span>专业技能</h2>
+            <div class="skill-tags compact">
+              <span>Java</span><span>Spring Boot</span><span>Mybatis/Mybatis-plus</span><span>RESTful API</span>
+              <span>Maven</span><span>MySQL</span><span>Vue</span><span>Java Script</span>
+              <span>HTML5</span><span>CSS3</span><span>Vite</span><span>Axios</span>
+              <span>Element Plus</span><span>Linux</span><span>阿里云 ECS</span><span>Nginx</span>
+              <span>Windows Forms</span><span>NAudio</span>
+            </div>
+          </section>
+
+          <section class="card resume-project">
+            <span class="icon project-icon">药</span>
+            <div>
+              <h2>乡镇药店管理系统 <span class="pill">Spring Boot 3</span></h2>
+              <p class="stack">Spring Boot 3 / Spring Security / MyBatis-Plus / MySQL / Vue 3 / Element Plus / Nginx</p>
+              <ul>
+                <li>负责前后端分离业务功能设计与实现，覆盖药品、供应商、会员、采购、销售、库存、盘点和日志模块。</li>
+                <li>管理端部署在 <a href="https://admin.yaoliumu.me" target="_blank" rel="noreferrer noopener">admin.yaoliumu.me</a>，测试账号：demo，测试密码：demo。</li>
+                <li>用户端部署在 <a href="https://client.yaoliumu.me" target="_blank" rel="noreferrer noopener">client.yaoliumu.me</a>，用于展示药品查询、会员中心和 AI 客服等功能。</li>
+              </ul>
+            </div>
+            <a href="#/pharmacy-system" class="detail-link">项目详情</a>
+          </section>
+
+          <section class="card resume-project">
+            <span class="icon project-icon">音</span>
+            <div>
+              <h2>NewPlayer 轻量级本地音乐播放器 <span class="pill">C# / .NET 8</span></h2>
+              <p class="stack">C# / .NET 8 / Windows Forms / NAudio</p>
+              <ul>
+                <li>使用 NAudio 实现 MP3 文件读取与音频播放控制。</li>
+                <li>实现本地 Music 文件夹扫描、歌曲列表加载、顺序播放、随机播放、单曲循环和音量调节。</li>
+                <li>v1.0.0 发布包已提供 Gitee Release 下载入口。</li>
+              </ul>
+            </div>
+            <a href="#/music-player" class="detail-link">项目详情</a>
+          </section>
+        </div>
+      </div>
+    </template>
+
+    <template id="pharmacy-template">
+      <div class="page-shell pharmacy-page">
+        <section class="card pharmacy-overview">
+          <div class="project-head">
+            <div>
+              <h1>乡镇药店管理系统 <span class="pill">Spring Boot + Vue 3</span></h1>
+              <p>面向乡镇药店日常经营管理的前后端分离系统。</p>
+              <div class="actions">
+                <a class="button primary" href="https://admin.yaoliumu.me" target="_blank" rel="noreferrer noopener">打开管理端</a>
+                <a class="button" href="https://client.yaoliumu.me" target="_blank" rel="noreferrer noopener">打开用户端</a>
+              </div>
+            </div>
+            <div class="download-path">
+              <strong>管理端测试账号</strong>
+              <p>账号：demo</p>
+              <p>密码：demo</p>
+              <p>仅用于测试访问管理端前端(只读)。</p>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <article><span class="metric-icon blue">药</span><strong>23</strong><p>当前总订单</p></article>
+            <article><span class="metric-icon green">库</span><strong>11</strong><p>当前库存批次</p></article>
+            <article><span class="metric-icon orange">期</span><strong>1</strong><p>30 天内到期</p></article>
+            <article><span class="metric-icon purple">办</span><strong>7</strong><p>待处理事项</p></article>
+          </div>
+          <div class="module-grid">
+            <article><span class="icon blue">管</span><h3>管理端</h3><p>药品管理、采购管理、销售订单、库存管理、库存盘点等。</p></article>
+            <article><span class="icon green">客</span><h3>用户端</h3><p>药品查询、会员中心、药店信息展示和规则型 AI 客服。</p></article>
+            <article><span class="icon purple">API</span><h3>后端服务</h3><p>REST API、业务分层、统一响应处理、AOP 日志和缓存。</p></article>
+            <article><span class="icon orange">服</span><h3>部署结构</h3><p>Nginx 托管前端静态资源；后端代理仅作为内部部署能力，不在作品集页面公开展示。</p></article>
+          </div>
+        </section>
+
+        <section class="card architecture">
+          <div>
+            <h2><span class="icon mini">构</span>系统架构</h2>
+            <p>页面只展示访问者需要进入的前端入口，后端接口、服务器内部路径、数据库等信息不在作品集中公开。</p>
+          </div>
+          <div class="route-map">
+            <span>admin.yaoliumu.me</span><strong>药店管理系统管理端</strong>
+            <span>client.yaoliumu.me</span><strong>药店管理系统用户端</strong>
+            <span>demo / demo</span><strong>管理端前端测试账号</strong>
+          </div>
+        </section>
+
+        <section class="card block-section">
+          <h2><span class="icon mini">图</span>项目截图</h2>
+          <div class="screen-row">
+            <figure><img src="./assets/images/pharmacy-admin/dashboard.jpeg" alt="管理端控制台截图" /><figcaption>管理端控制台</figcaption></figure>
+            <figure><img src="./assets/images/pharmacy-admin/medicine.jpeg" alt="药品管理截图" /><figcaption>药品管理</figcaption></figure>
+            <figure><img src="./assets/images/pharmacy-admin/inventory.jpeg" alt="库存管理截图" /><figcaption>库存管理</figcaption></figure>
+            <figure><img src="./assets/images/pharmacy-client/search.jpeg" alt="用户端药品查询截图" /><figcaption>用户端药品查询</figcaption></figure>
+          </div>
+        </section>
+
+        <section class="card roadmap">
+          <h2><span class="icon mini">清</span>展示说明</h2>
+          <ul>
+            <li>管理端涉及后台数据维护权限，演示账号可在沟通时提供。</li>
+            <li>用户端可展示药品查询、药店信息、会员中心和 AI 客服等功能。</li>
+          </ul>
+        </section>
+      </div>
+    </template>
+
+    <template id="music-template">
+      <div class="page-shell music-page">
+        <section class="music-top">
+          <article class="card music-intro">
+            <h1>NewPlayer 轻量级本地音乐播放器 <span>C# / .NET 8 / NAudio</span></h1>
+            <p>面向 Windows 的本地 MP3 播放器，不内置、不分发任何音乐资源，用户自行准备合法来源的本地音乐文件。</p>
+            <div class="actions">
+              <a class="button primary" href="https://gitee.com/yaoliumu/lightweight-music-player/releases/tag/v1.0.0" target="_blank" rel="noreferrer noopener">下载 v1.0.0</a>
+            </div>
+          </article>
+          <article class="card about-card">
+            <h2>关于 <span>(ABOUT)</span></h2>
+            <p>基于 Windows Forms 和 NAudio 开发，支持扫描本地 Music 文件夹中的 MP3 文件，并提供播放、暂停、上一曲、下一曲、顺序播放、随机播放、单曲循环、音量调节和快捷键控制等功能。</p>
+            <div class="meta-tags">
+              <span>版本：v1.0.0</span>
+              <span>系统：Windows</span>
+              <span>运行环境：.NET 8</span>
+              <span>发布地址：Gitee Release</span>
+            </div>
+          </article>
+        </section>
+
+        <section class="card music-feature">
+          <h2><span class="icon mini">能</span>功能与截图</h2>
+          <div class="music-feature-grid">
+            <img class="player-shot" src="./assets/images/music-player/player-main.png" alt="NewPlayer 主界面截图" />
+            <div class="music-feature-copy">
+              <h3>主要功能</h3>
+              <ul class="check-list">
+                <li>播放器主界面简洁直观，支持快捷播放。</li>
+                <li>顺序播放、随机播放、单曲循环多种模式。</li>
+                <li>支持音量调节与实时反馈。</li>
+                <li>不内置、不分发任何音乐资源，保护版权。</li>
+              </ul>
+              <h3>截图预览</h3>
+              <div class="music-thumbs">
+                <figure><img src="./assets/images/music-player/player-main.png" alt="播放器主界面截图" /><figcaption>播放器主界面</figcaption></figure>
+                <figure><img src="./assets/images/music-player/music-folder.png" alt="Music 文件夹截图" /><figcaption>默认 Music 文件夹</figcaption></figure>
+                <figure><img src="./assets/images/music-player/project-structure.png" alt="项目结构截图" /><figcaption>项目结构</figcaption></figure>
+                <figure><img src="./assets/images/music-player/music-folder.png" alt="本地音乐目录截图" /><figcaption>本地音乐目录</figcaption></figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card download-panel">
+          <div>
+            <h2><span class="icon mini">下</span>下载入口 <span>(DOWNLOAD)</span></h2>
+            <p>音乐播放器发布包已通过 Gitee v1.0.0 Release 提供，页面不再展示额外的站点下载目录。</p>
+          </div>
+          <div class="download-path">
+            <strong><a href="https://gitee.com/yaoliumu/lightweight-music-player/releases/tag/v1.0.0" target="_blank" rel="noreferrer noopener">Gitee：lightweight-music-player v1.0.0</a></strong>
+            <p>推荐从 Gitee Release 获取最新发布包。</p>
+          </div>
+        </section>
+      </div>
+    </template>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+[Unit]
+Description=Pharmacy Admin Spring Boot Service
+After=network.target mysql.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/portfolio-deploy/pharmacy-system/pharmacy-admin
+ExecStart=/usr/bin/java -jar /opt/portfolio-deploy/pharmacy-system/pharmacy-admin/target/pharmacy-admin-1.0.0.jar
+Restart=always
+RestartSec=5
+User=www-data
+
+Environment="DB_URL=jdbc:mysql://127.0.0.1:3306/pms_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false"
+Environment="DB_USERNAME=root"
+Environment="DB_PASSWORD=change_me"
+
+[Install]
+WantedBy=multi-user.target

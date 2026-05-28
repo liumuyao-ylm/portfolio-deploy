@@ -1,0 +1,279 @@
+<template>
+  <div class="page">
+    <section class="panel filter-panel">
+      <el-form :model="filters" class="filter-form" label-width="92px">
+        <el-form-item label="药品名称" class="keyword-item">
+          <el-input v-model="filters.keyword" placeholder="请输入药品名称" clearable @keyup.enter="handleSearch">
+            <template #prefix><el-icon><Search /></el-icon></template>
+          </el-input>
+          <el-button type="primary" :icon="Search" @click="handleSearch">搜索</el-button>
+        </el-form-item>
+        <el-button class="reset-button" :icon="Refresh" @click="resetFilters">重置</el-button>
+        <el-form-item label="药品类型">
+          <el-select v-model="filters.type" placeholder="全部类型" clearable>
+            <el-option label="中药" value="中药" />
+            <el-option label="西药" value="西药" />
+            <el-option label="器械" value="器械" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="剂型">
+          <el-select v-model="filters.dosageForm" placeholder="全部剂型" clearable>
+            <el-option v-for="item in dosageOptions" :key="item" :label="item" :value="item" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="是否处方药">
+          <el-select v-model="filters.isRx" placeholder="全部" clearable>
+            <el-option label="非处方药" :value="0" />
+            <el-option label="处方药" :value="1" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="库存状态">
+          <el-select v-model="filters.stockStatus" placeholder="全部状态" clearable>
+            <el-option label="有货" value="有货" />
+            <el-option label="库存较少" value="库存较少" />
+            <el-option label="无货" value="无货" />
+          </el-select>
+        </el-form-item>
+      </el-form>
+    </section>
+
+    <section class="section panel table-panel">
+      <el-table v-loading="loading" :data="medicines" empty-text="暂无匹配药品" @row-click="goDetail">
+        <el-table-column prop="name" label="药品名称" min-width="190" />
+        <el-table-column prop="spec" label="规格" min-width="150">
+          <template #default="{ row }">{{ row.spec || '暂无' }}</template>
+        </el-table-column>
+        <el-table-column prop="dosageForm" label="剂型" min-width="120">
+          <template #default="{ row }">{{ row.dosageForm || '暂无' }}</template>
+        </el-table-column>
+        <el-table-column label="零售价" width="140">
+          <template #default="{ row }">¥ {{ formatPrice(row.retailPrice) }}</template>
+        </el-table-column>
+        <el-table-column prop="manufacturer" label="生产厂家" min-width="260">
+          <template #default="{ row }">{{ row.manufacturer || '暂无' }}</template>
+        </el-table-column>
+        <el-table-column label="是否处方药" width="140">
+          <template #default="{ row }">
+            <el-tag :type="row.isRx === 1 ? 'warning' : ''">{{ row.isRx === 1 ? '处方药' : '非处方药' }}</el-tag>
+          </template>
+        </el-table-column>
+        <el-table-column label="库存状态" width="130">
+          <template #default="{ row }">
+            <el-tag :type="stockTagType(row.stockStatus)">{{ row.stockStatus }}</el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+
+      <div class="table-footer">
+        <span>共 {{ page.total }} 条结果</span>
+        <el-pagination
+          layout="prev, pager, next"
+          :page-size="page.size"
+          :total="page.total"
+          v-model:current-page="page.current"
+          @current-change="loadMedicines"
+        />
+      </div>
+    </section>
+  </div>
+</template>
+
+<script setup>
+import { onMounted, reactive, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { Refresh, Search } from '@element-plus/icons-vue'
+import { getClientMedicines } from '@/api/client-medicine'
+
+const route = useRoute()
+const router = useRouter()
+const loading = ref(false)
+const medicines = ref([])
+const page = reactive({
+  current: 1,
+  size: 8,
+  total: 0
+})
+const filters = reactive({
+  keyword: route.query.keyword || '',
+  type: route.query.type || '',
+  dosageForm: '',
+  isRx: route.query.isRx === undefined ? '' : Number(route.query.isRx),
+  stockStatus: route.query.stockStatus || ''
+})
+const dosageOptions = ['片剂', '胶囊', '颗粒', '针剂', '膏剂', '散剂', '外用液体']
+
+const buildParams = () => ({
+  current: page.current,
+  size: page.size,
+  keyword: filters.keyword || undefined,
+  type: filters.type || undefined,
+  dosageForm: filters.dosageForm || undefined,
+  isRx: filters.isRx === '' ? undefined : filters.isRx,
+  stockStatus: filters.stockStatus || undefined
+})
+
+const loadMedicines = async () => {
+  loading.value = true
+  try {
+    const { data } = await getClientMedicines(buildParams())
+    if (data.code !== 200) {
+      throw new Error(data.message || '药品查询失败')
+    }
+    const result = data.data || {}
+    medicines.value = result.records || []
+    page.total = Number(result.total || 0)
+    page.current = Number(result.current || page.current)
+    page.size = Number(result.size || page.size)
+  } catch (error) {
+    ElMessage.error('药品查询失败，请确认后端服务已启动')
+    medicines.value = []
+    page.total = 0
+  } finally {
+    loading.value = false
+  }
+}
+
+const handleSearch = () => {
+  page.current = 1
+  loadMedicines()
+}
+
+const resetFilters = () => {
+  filters.keyword = ''
+  filters.type = ''
+  filters.dosageForm = ''
+  filters.isRx = ''
+  filters.stockStatus = ''
+  handleSearch()
+}
+
+const goDetail = (row) => {
+  router.push(`/medicines/${row.id}`)
+}
+
+const stockTagType = (status) => {
+  if (status === '有货') return 'success'
+  if (status === '库存较少') return 'warning'
+  return 'info'
+}
+
+const formatPrice = (price) => Number(price || 0).toFixed(2)
+
+watch(
+  () => route.query,
+  (query) => {
+    filters.keyword = query.keyword || ''
+    filters.type = query.type || ''
+    filters.isRx = query.isRx === undefined ? '' : Number(query.isRx)
+    filters.stockStatus = query.stockStatus || ''
+    handleSearch()
+  }
+)
+
+onMounted(loadMedicines)
+</script>
+
+<style scoped>
+.filter-panel {
+  padding: 18px 28px 8px;
+}
+
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px 26px;
+  align-items: center;
+}
+
+.filter-form :deep(.el-form-item) {
+  margin-bottom: 0;
+}
+
+.keyword-item {
+  grid-column: 1 / 2;
+}
+
+.keyword-item :deep(.el-form-item__content) {
+  display: grid;
+  grid-template-columns: minmax(280px, 520px) 120px;
+}
+
+.keyword-item :deep(.el-input__wrapper) {
+  border-radius: 6px 0 0 6px;
+}
+
+.keyword-item .el-button {
+  height: 52px;
+  border-radius: 0 6px 6px 0;
+  font-size: 18px;
+}
+
+.reset-button {
+  justify-self: end;
+  width: 112px;
+  height: 52px;
+}
+
+.filter-form :deep(.el-select) {
+  width: 220px;
+}
+
+.filter-form :deep(.el-input__wrapper),
+.filter-form :deep(.el-select__wrapper) {
+  min-height: 52px;
+  font-size: 17px;
+}
+
+.table-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.table-panel :deep(.el-table__row) {
+  cursor: pointer;
+}
+
+.table-panel :deep(.el-table .cell) {
+  padding: 0 28px;
+}
+
+.table-panel :deep(.el-table__cell) {
+  height: 64px;
+}
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 28px;
+  color: var(--client-muted);
+}
+
+@media (max-width: 980px) {
+  .filter-form,
+  .keyword-item :deep(.el-form-item__content) {
+    grid-template-columns: 1fr;
+  }
+
+  .reset-button {
+    justify-self: stretch;
+    width: 100%;
+  }
+
+  .filter-form :deep(.el-select) {
+    width: 100%;
+  }
+
+  .keyword-item .el-button,
+  .keyword-item :deep(.el-input__wrapper) {
+    border-radius: 6px;
+  }
+
+  .table-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>

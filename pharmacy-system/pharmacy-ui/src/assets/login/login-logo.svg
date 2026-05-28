@@ -1,0 +1,30 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGradient" x1="16" y1="12" x2="112" y2="116" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F8CFF"></stop>
+      <stop offset="1" stop-color="#2563EB"></stop>
+    </linearGradient>
+
+    <filter id="shadow" x="0" y="0" width="128" height="128" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-opacity="0.18"></feDropShadow>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <g filter="url(#shadow)">
+    <rect x="12" y="12" width="104" height="104" rx="28" fill="url(#bgGradient)"></rect>
+  </g>
+
+  <!-- Panel -->
+  <rect x="34" y="34" width="60" height="60" rx="12" fill="white" fill-opacity="0.15"></rect>
+
+  <!-- Top bar -->
+  <rect x="42" y="42" width="44" height="8" rx="4" fill="white"></rect>
+
+  <!-- Grid -->
+  <rect x="42" y="58" width="16" height="12" rx="3" fill="white"></rect>
+  <rect x="62" y="58" width="24" height="12" rx="3" fill="white" fill-opacity="0.9"></rect>
+
+  <rect x="42" y="74" width="24" height="12" rx="3" fill="white" fill-opacity="0.9"></rect>
+  <rect x="70" y="74" width="16" height="12" rx="3" fill="white"></rect>
+</svg>
